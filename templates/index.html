@@ -1,0 +1,33 @@
+{% extends  "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8fafc;
+    }
+    .card {
+        box-shadow: 5px 5px 25px #1a1919,
+            -5px -5px 25px #1a1919;
+    }
+    .home-bg {
+        height: 92vh;
+        background-image: url("{{ url_for('static', filename='images/' + 'home_bg.png') }}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .home-bg .card {
+        margin-top: -5rem;
+    }
+</style>
+<div class="container-fluid d-flex justify-content-center home-bg align-items-center services pt-3">
+    <div class="card" style="width: 26rem;">
+        <img src="{{ url_for('static', filename='images/crop.jpg') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Crop Prediction</h5>
+            <p class="card-text">Predict the Crop which is most suitable for your soil conditions and also based on the climatic conditions of your city.</p>
+            <a href="{{ url_for('predict') }}" class="btn btn-primary d-flex justify-content-center">Predict</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

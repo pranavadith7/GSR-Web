@@ -1,0 +1,77 @@
+{% extends  "base.html" %}
+
+{% block content %}
+<style>
+    .container {
+        background-color: rgba(243, 244, 246, 1);
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Nunito', sans-serif;
+    }
+    .container input, .container select {
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+    }
+    body {
+        height: 92vh;
+        background-image: url("{{ url_for('static', filename='images/' + 'home_bg.png') }}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    h2.text-center {
+        color: white;
+    }
+</style>
+
+<h2 class="text-center">Predict the crop for your farm</h2>
+<br />
+
+<div class="container px-5 pt-3 pb-2">
+    <form method="post" action="{{ url_for('predict') }}">
+        <div class="form-group">
+            <label label for="nitrogen">Nitrogen (mg/kg)</label>
+            <input type="number" class="form-control" id="nitrogen" name="nitrogen" placeholder="Enter N value" min="0" max="140" required />
+        </div>
+
+        <div class="form-group">
+            <label for="phosphorous">Phosphorous (mg/kg)</label>
+            <input type="number" class="form-control" id="phosphorous" name="phosphorous" placeholder="Enter P value" min="5" max="145" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Pottasium">Pottasium (mg/kg)</label>
+            <input type="number" class="form-control" id="Pottasium" name="pottasium" placeholder="Enter K value" min="5" max="205" required />
+        </div>
+
+        <div class="form-group">
+            <label for="ph">ph level (1-14)</label>
+            <input type="number" step="0.01" class="form-control" id="ph" name="ph" placeholder="Enter the value" min="1" max="14" required />
+        </div>
+
+        <div class="form-group">
+            <label for="rainfall">Rainfall (in mm)</label>
+            <input type="number" step="0.1" class="form-control" id="rainfall" name="rainfall" placeholder="Enter the value" required />
+        </div>
+
+        <div class="form-group">
+            <label for="state">State</label>
+            <select onchange="print_city('city', this.selectedIndex);" id="state" name="state" class="form-control" required></select>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" class="form-control" name="city" required></select>
+            <script language="javascript">
+                print_state("state");
+            </script>
+        </div>
+
+        <br>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

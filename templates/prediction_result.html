@@ -1,0 +1,33 @@
+{% extends  "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8fafc;
+    }
+    .card {
+        box-shadow: 5px 9px 30px #1a1919,
+            -5px -9px 30px #1a1919;
+    }
+    .crop-bg {
+        height: 92vh;
+        background-image: url("{{ url_for('static', filename='images/crops/' + predicted_crop + '.jpg') }}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .crop-bg .card {
+        margin-top: -5rem;
+    }
+</style>
+<div class="container-fluid d-flex justify-content-center align-items-center crop-bg">
+    <div class="card" style="width: 26rem;">
+        <!-- <img src="{{ url_for('static', filename='images/crop.jpg') }}" class="card-img-top" alt="..."> -->
+        <div class="card-body">
+            <h5 class="card-title">Predicted Crop</h5>
+            <p class="card-text">You can grow the following crop.</p>
+            <a href="{{ url_for('static', filename='images/crops/' + predicted_crop + '.jpg') }}" class="btn btn-danger d-flex justify-content-center"><b>{{ predicted_crop }}</b></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
